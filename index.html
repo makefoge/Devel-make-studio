@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Создание файла на стороне клиента</title>
+	<script>
+		function download(filename, text) {
+			var element = document.createElement('a');
+			element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+			element.setAttribute('download', filename);
+
+			element.style.display = 'none';
+			document.body.appendChild(element);
+
+			element.click();
+
+			document.body.removeChild(element);
+		}
+
+		function createFile() {
+			var filename = document.getElementById("filename").value;
+			var content = document.getElementById("content").value;
+			download(filename, content);
+		}
+	</script>
+</head>
+<body>
+	<label for="filename">Имя файла:</label>
+	<input type="text" id="filename"><br><br>
+	<label for="content">Содержимое файла:</label><br>
+	<textarea id="content" rows="10" cols="50"></textarea><br><br>
+	<button onclick="createFile()">Создать файл</button>
+</body>
+</html>
